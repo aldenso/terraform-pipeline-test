@@ -3,6 +3,8 @@ try {
         env.TF_VAR_prefix = "${params.PREFIX}"
         env.TF_VAR_size = "${params.SIZE}"
 
+        checkout scm
+
         stage('Stage 1') {
             withCredentials([string(credentialsId: 'AZTENANT-DEV', variable: 'AZTENANT'),
                             string(credentialsId: 'AZSUBSCRIPTION-DEV', variable: 'AZSUBSCRIPTION'),
@@ -17,8 +19,10 @@ try {
                 }
         }
     }
+    cleanWs()
 } catch (Exception e) {
     node {
         throw e
+        cleanWs()
     }
 }
