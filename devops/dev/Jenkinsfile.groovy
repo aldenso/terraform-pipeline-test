@@ -18,11 +18,11 @@ try {
                 sh "terraform plan"
                 }
         }
+        cleanWs()
     }
-    cleanWs()
 } catch (Exception e) {
     node {
-        throw e
         cleanWs()
+        throw e
     }
 }
