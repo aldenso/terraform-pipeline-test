@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        TF_VAR_prefix   = params.PREFIX
-        TF_VAR_size = params.SIZE
+        TF_VAR_prefix = "${params.PREFIX}"
+        TF_VAR_size = "${params.SIZE}"
     }
     stages {
         stage('Stage 1') {
