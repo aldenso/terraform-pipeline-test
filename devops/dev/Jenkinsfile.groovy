@@ -15,7 +15,7 @@ try {
                 env.ARM_SUBSCRIPTION_ID = "${AZSUBSCRIPTION}"
                 env.ARM_TENANT_ID = "${AZTENANT}"
                 sh "terraform init"
-                sh "terraform plan"
+                sh "terraform plan --no-color"
                 }
         }
         cleanWs()
