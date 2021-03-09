@@ -12,8 +12,8 @@ try {
                 env.ARM_CLIENT_CERTIFICATE_PATH = "${AZCERTIFICATE}"
                 env.ARM_SUBSCRIPTION_ID = "${AZSUBSCRIPTION}"
                 env.ARM_TENANT_ID = "${AZTENANT}"
-                terraform init
-                terraform plan
+                sh "terraform init"
+                sh "terraform plan"
                 }
         }
     }
