@@ -13,9 +13,11 @@ variable "vmsize" {
   default = "Standard_D2s_v3"
 }
 variable "username" {
-  type = string
+  type    = string
+  default = "superroot"
 }
 
 variable "password" {
-  type = string
+  type    = string
+  default = "topsecret"
 }
