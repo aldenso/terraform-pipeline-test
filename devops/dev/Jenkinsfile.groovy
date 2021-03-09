@@ -14,8 +14,8 @@ try {
                 env.ARM_CLIENT_CERTIFICATE_PATH = "${AZCERTIFICATE}"
                 env.ARM_SUBSCRIPTION_ID = "${AZSUBSCRIPTION}"
                 env.ARM_TENANT_ID = "${AZTENANT}"
-                sh "terraform init"
-                sh "terraform plan --no-color"
+                sh "terraform init -no-color"
+                sh "terraform plan -no-color"
                 }
         }
         cleanWs()
