@@ -17,7 +17,7 @@ try {
                 env.ARM_TENANT_ID = "${AZTENANT}"
                 env.ARM_ACCESS_KEY = "${AZACCESSKEY}"
                 sh "terraform init -no-color"
-                sh "terraform plan -no-color"
+                sh "terraform apply -auto-approve -no-color"
                 }
         }
         cleanWs()
