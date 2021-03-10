@@ -2,6 +2,16 @@ provider "azurerm" {
   features {}
 }
 
+# define your own storage_account_name and export ARM_ACCESS_KEY
+terraform {
+  backend "azurerm" {
+    resource_group_name   = "tfstates"
+    storage_account_name  = "tfstatesaldenso"
+    container_name        = "terraform"
+    key                   = "terraform_vm.tfstate"
+  }
+}
+
 resource "azurerm_resource_group" "main" {
     name     = "${var.prefix}-resources"
     location = var.location

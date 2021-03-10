@@ -14,10 +14,10 @@ variable "vmsize" {
 }
 variable "username" {
   type    = string
-  default = "superroot"
+  default = "azureuser"
 }
 
 variable "password" {
   type    = string
-  default = "topsecret"
+  default = "myvery01Secure@ccess"
 }
