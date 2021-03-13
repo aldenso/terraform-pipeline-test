@@ -5,29 +5,29 @@ provider "azurerm" {
 # define your own storage_account_name and export ARM_ACCESS_KEY
 terraform {
   backend "azurerm" {
-    resource_group_name   = "tfstates"
-    storage_account_name  = "tfstatesaldenso"
-    container_name        = "terraform"
-    key                   = "terraform_vm.tfstate"
+    resource_group_name  = "tfstates"
+    storage_account_name = "tfstatesaldenso"
+    container_name       = "terraform"
+    key                  = "terraform_vm.tfstate"
   }
 }
 
 resource "azurerm_resource_group" "main" {
-    name     = "${var.prefix}-resources"
-    location = var.location
-    tags = {
-      "ENV" = "DESTROY"
-    }
+  name     = "${var.prefix}-resources"
+  location = var.location
+  tags = {
+    "ENV" = "DESTROY"
+  }
 }
 
 resource "azurerm_virtual_network" "main" {
-    name                = "${var.prefix}-network"
-    address_space       = [ "10.0.0.0/16" ]
-    location            = azurerm_resource_group.main.location
-    resource_group_name = azurerm_resource_group.main.name
-    tags = {
-      "ENV" = "DESTROY"
-    }
+  name                = "${var.prefix}-network"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tags = {
+    "ENV" = "DESTROY"
+  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -38,15 +38,16 @@ resource "azurerm_subnet" "internal" {
 }
 
 resource "azurerm_public_ip" "main" {
-  name                         = "mypublicip"
-  location                     = azurerm_resource_group.main.location
-  resource_group_name          = azurerm_resource_group.main.name
-  allocation_method            = "Dynamic"
+  name                = "mypublicip"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  allocation_method   = "Dynamic"
 
   tags = {
     "ENV" = "DESTROY"
   }
 }
+
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic"
   resource_group_name = azurerm_resource_group.main.name
@@ -58,6 +59,7 @@ resource "azurerm_network_interface" "main" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.main.id
   }
+
   tags = {
     "ENV" = "DESTROY"
   }
