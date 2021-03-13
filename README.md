@@ -25,4 +25,4 @@ export ARM_ACCESS_KEY='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 export TF_VAR_prefix=WHATYOUWANT
 ```
 
-**Note**: Change the backend configuration in 'main.tf' to point to your configuration.
+**Note**: Change the backend configuration in [main.tf](main.tf) to point to your configuration.
