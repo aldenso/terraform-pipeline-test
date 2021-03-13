@@ -2,7 +2,7 @@
 
 Test repo for terraform jenkins pipelines for VM creation, used in conjuntion with [jenkins-jcasc](https://github.com/aldenso/jenkins-jcasc-demo)
 
-Minimal requisites to run manually.
+Minimal requirements to run manually.
 
 - Azure Subscription (ARM_SUBSCRIPTION_ID)
 - Azure Tenant (ARM_TENANT_ID)
@@ -25,4 +25,4 @@ export ARM_ACCESS_KEY='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 export TF_VAR_prefix=WHATYOUWANT
 ```
 
-**Note**: Changed the backend configuration in 'main.tf' to point to your configuration.
+**Note**: Change the backend configuration in 'main.tf' to point to your configuration.
