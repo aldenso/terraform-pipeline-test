@@ -26,3 +26,15 @@ export TF_VAR_prefix=WHATYOUWANT
 ```
 
 **Note**: Change the backend configuration in [main.tf](main.tf) to point to your configuration.
+
+```
+# define your own storage_account_name and export ARM_ACCESS_KEY
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "yourRG"
+    storage_account_name = "yourStorageAccount"
+    container_name       = "yourcontainer"
+    key                  = "whatyouwant.tfstate"
+  }
+}
+```
