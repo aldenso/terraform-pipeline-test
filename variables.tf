@@ -23,11 +23,13 @@ variable "size" {
 }
 
 variable "username" {
-  type = string
+  type    = string
+  default = "azureuser"
 }
 
 variable "password" {
-  type = string
+  type    = string
+  default = "myvery01Secure@ccess"
 }
 
 variable "distro" {
