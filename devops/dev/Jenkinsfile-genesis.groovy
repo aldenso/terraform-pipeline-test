@@ -1,6 +1,7 @@
 try {
     node {
         env.TF_VAR_prefix = "${params.PREFIX}"
+        env.TF_VAR_size = "${params.DISTRO}"
         env.TF_VAR_size = "${params.SIZE}"
 
         checkout scm
