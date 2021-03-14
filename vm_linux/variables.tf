@@ -8,6 +8,16 @@ variable "prefix" {
   default = "project01"
 }
 
+variable "username" {
+  type    = string
+  default = "azureuser"
+}
+
+variable "password" {
+  type    = string
+  default = "myvery01Secure@ccess"
+}
+
 variable "vmsize" {
   type = map(any)
   default = {
@@ -22,15 +32,11 @@ variable "size" {
   default = "small"
 }
 
-variable "username" {
+variable "resource_group_name" {
   type = string
 }
 
-variable "password" {
-  type = string
-}
-
-variable "distro" {
+variable "network_interface" {
   type = string
 }
 

@@ -16,7 +16,7 @@ resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}-resources"
   location = var.location
   tags = {
-    "ENV" = "DESTROY"
+    (var.tag_name) = (var.tag_value)
   }
 }
 
@@ -26,7 +26,7 @@ resource "azurerm_virtual_network" "main" {
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   tags = {
-    "ENV" = "DESTROY"
+    (var.tag_name) = (var.tag_value)
   }
 }
 
@@ -44,7 +44,7 @@ resource "azurerm_public_ip" "main" {
   allocation_method   = "Dynamic"
 
   tags = {
-    "ENV" = "DESTROY"
+    (var.tag_name) = (var.tag_value)
   }
 }
 
@@ -61,34 +61,32 @@ resource "azurerm_network_interface" "main" {
   }
 
   tags = {
-    "ENV" = "DESTROY"
+    (var.tag_name) = (var.tag_value)
   }
 }
 
-resource "azurerm_linux_virtual_machine" "main" {
-  name                            = "${var.prefix}-vm"
-  resource_group_name             = azurerm_resource_group.main.name
-  location                        = azurerm_resource_group.main.location
-  size                            = var.vmsize[var.size]
-  admin_username                  = var.username
-  admin_password                  = var.password
-  disable_password_authentication = false
-  network_interface_ids = [
-    azurerm_network_interface.main.id,
-  ]
+module "vmlinux" {
+  count               = var.distro == "Linux" ? 1 : 0
+  source              = "./vm_linux"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  size                = var.vmsize[var.size]
+  username            = var.username
+  password            = var.password
+  network_interface   = azurerm_network_interface.main.id
+  tag_name            = var.tag_name
+  tag_value           = var.tag_value
+}
 
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
-  }
-
-  os_disk {
-    storage_account_type = "Standard_LRS"
-    caching              = "ReadWrite"
-  }
-  tags = {
-    "ENV" = "DESTROY"
-  }
+module "vmwindows" {
+  count               = var.distro == "Windows" ? 1 : 0
+  source              = "./vm_windows"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  size                = var.vmsize[var.size]
+  username            = var.username
+  password            = var.password
+  network_interface   = azurerm_network_interface.main.id
+  tag_name            = var.tag_name
+  tag_value           = var.tag_value
 }
